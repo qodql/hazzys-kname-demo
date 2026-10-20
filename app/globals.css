@@ -1,0 +1,258 @@
+/* 원본 스니펫 CSS를 기반으로, 이메일 영역을 이미지 저장 버튼으로 바꾸고 데모 안내 푸터를 더함 */
+:root {
+  --ink: #100f21;
+  --ink-hover: #0a0916;
+  --muted: #7a8a9a;
+  --soft: #8a9ab0;
+  --line: #dde3ec;
+  --field: #f8fafc;
+  --selected: #f0f4f9;
+  --stone: #8a8478;
+  --danger: #d9534f;
+  --font: 'Montserrat', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+  --font-name: 'Song Myung', 'Noto Sans KR', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #f4f4f4; color: var(--ink); }
+body { font-family: var(--font); -webkit-font-smoothing: antialiased; }
+button { font: inherit; }
+[lang='zh-CN'] { font-family: 'Montserrat', 'Noto Sans SC', 'Noto Sans KR', sans-serif; }
+[lang='ja'] { font-family: 'Montserrat', 'Noto Sans JP', 'Noto Sans KR', sans-serif; }
+
+.kname-page { min-height: 100vh; display: flex; flex-direction: column; }
+
+.kname-wrap {
+  flex: 1;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.kname-logo {
+  display: block;
+  margin: 0 auto 72px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  height: 32px;
+}
+.kname-logo img { display: block; height: 100%; width: auto; }
+
+.kname-progress { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 40px; }
+.kname-progress-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--line); transition: background 0.3s ease, transform 0.3s ease; }
+.kname-progress-dot.is-active { background: var(--ink); transform: scale(1.3); }
+.kname-progress-dot.is-done { background: var(--stone); }
+
+.kname-steps { position: relative; min-height: 360px; }
+.kname-step { display: flex; flex-direction: column; align-items: center; gap: 22px; animation: kname-fade-in 0.35s ease; }
+@keyframes kname-fade-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.kname-step-header { display: flex; align-items: center; gap: 10px; width: 100%; justify-content: center; }
+.kname-step-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--ink); color: #fff;
+  font: 600 20px/1 'Montserrat', sans-serif;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.kname-step-title { font-size: 25px; font-weight: 700; color: var(--ink); white-space: nowrap; }
+.kname-step-desc { font-size: 18px; color: var(--muted); text-align: center; line-height: 1.5; margin-top: -12px; }
+
+.kname-back {
+  align-self: flex-start; width: 100%; max-width: 600px; margin: 0 auto -10px;
+  border: 0; background: none; color: var(--soft); font-size: 17px; cursor: pointer; padding: 6px 0; text-align: left;
+}
+.kname-back:hover { color: var(--ink); }
+.kname-back.is-hidden { visibility: hidden; }
+
+.kname-input-card {
+  width: 100%; max-width: 600px;
+  background: #fff; border: 1.5px solid #e2e8f0; border-radius: 20px;
+  padding: 40px 32px;
+  display: flex; flex-direction: column; gap: 20px;
+  box-shadow: 0 4px 20px rgba(16, 15, 33, 0.07);
+}
+.kname-label { font: 600 14px/1.2 'Montserrat', var(--font); color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+.kname-lang-tabs { display: flex; gap: 10px; }
+.kname-lang-tab {
+  flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 14px 16px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--field);
+  cursor: pointer; transition: border-color 0.15s ease, background 0.15s ease;
+}
+.kname-lang-tab:hover { border-color: #b9c4d0; }
+.kname-lang-tab.is-selected { border-color: var(--ink); background: var(--selected); }
+.kname-lang-label { font-size: 19px; font-weight: 600; color: var(--ink); }
+.kname-lang-tab[data-lang='zh'] .kname-lang-label { font-family: 'Noto Sans SC', 'Noto Sans KR', sans-serif; }
+.kname-lang-tab[data-lang='ja'] .kname-lang-label { font-family: 'Noto Sans JP', 'Noto Sans KR', sans-serif; }
+.kname-lang-short { display: none; }
+.kname-lang-check {
+  width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--line);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 11px; color: transparent; background: #fff;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.kname-lang-tab.is-selected .kname-lang-check { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+.kname-input-card input[type='text'] {
+  width: 100%; border: 1.5px solid var(--line); border-radius: 12px;
+  padding: 19px 20px; font: inherit; font-size: 21px; color: var(--ink);
+  background: var(--field); outline: none; transition: border-color 0.15s ease;
+}
+.kname-input-card input[type='text']:focus { border-color: var(--ink); background: #fff; }
+.kname-input-card input[type='text']::placeholder { color: #b0bac6; }
+.kname-input-card input[type='text'].kname-input-error { border-color: var(--danger); }
+.kname-inline-warning { font-size: 14px; color: var(--danger); margin-top: -6px; }
+
+.kname-primary {
+  width: 100%; padding: 21px; border: 0; border-radius: 12px;
+  background: var(--ink); color: #fff; font-size: 20px; font-weight: 600; letter-spacing: 0.02em;
+  cursor: pointer; transition: background 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
+}
+.kname-primary:not(:disabled):hover { background: var(--ink-hover); }
+.kname-primary:not(:disabled):active { transform: scale(0.98); }
+.kname-primary:disabled { opacity: 0.4; cursor: default; }
+
+.kname-remaining { font-size: 14px; color: var(--soft); text-align: center; }
+
+.kname-results { width: 100%; max-width: 600px; }
+.kname-list { display: flex; flex-direction: column; gap: 14px; width: 100%; }
+.kname-card {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  padding: 20px 24px; border: 1.5px solid var(--line); border-radius: 18px; background: #fff;
+  cursor: pointer; text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 8px rgba(16, 15, 33, 0.05);
+}
+.kname-card:hover { border-color: var(--ink); background: var(--field); }
+.kname-card.is-selected { border-color: var(--ink); background: var(--selected); box-shadow: 0 0 0 1px var(--ink) inset; }
+.kname-card-left { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.kname-ko { font-family: var(--font-name); font-size: 36px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.kname-ro { font-family: var(--font-name); font-size: 18px; color: var(--soft); letter-spacing: 0.03em; }
+.kname-card-check {
+  position: relative; width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--line);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 14px; color: transparent; transition: border-color 0.15s ease, background 0.15s ease;
+}
+.kname-card.is-selected .kname-card-check { background: var(--ink); border-color: var(--ink); color: #fff; }
+.kname-card-star {
+  position: absolute; top: -17px; left: -17px; width: 20px; height: 20px;
+  opacity: 0; transform: scale(0.6); transition: opacity 0.2s ease, transform 0.2s ease; pointer-events: none;
+}
+.kname-card.is-selected .kname-card-star { opacity: 1; transform: scale(1); }
+
+.kname-step2-footer { width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.kname-again {
+  width: 100%; padding: 19px; border: 0; border-radius: 12px; background: none;
+  color: var(--ink); font-size: 19px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px; line-height: 1;
+}
+.kname-again:disabled { opacity: 0.4; cursor: default; }
+.kname-again svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.kname-message { font-size: 17px; color: var(--soft); text-align: center; padding: 16px 0; line-height: 1.5; }
+.kname-loading-text {
+  background: linear-gradient(90deg, #5a6570 30%, #98a2ad 50%, #5a6570 70%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: kname-shimmer 3s linear infinite;
+}
+@keyframes kname-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* 로딩: 로고 이미지가 아래에서 위로 차오름 (원본과 같은 방식) */
+.kname-logo-loading-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 32px 0; }
+.kname-logo-loader { position: relative; width: 96px; }
+.kname-logo-loader img { display: block; width: 100%; height: auto; }
+.kname-logo-loader-base { opacity: 0.15; }
+.kname-logo-loader-fill {
+  position: absolute; top: 0; left: 0;
+  clip-path: inset(100% 0 0 0); animation: kname-logo-fill 1.8s ease-in-out infinite;
+}
+@keyframes kname-logo-fill { 0% { clip-path: inset(100% 0 0 0); } 65%, 100% { clip-path: inset(0 0 0 0); } }
+
+.kname-step3-inner { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 20px; }
+
+/* 이름 카드 600x300 — 내부 크기는 모두 em, 카드 너비에 맞춰 기준 글자 크기를 JS가 지정 */
+.kname-selected-card {
+  position: relative; width: 100%; aspect-ratio: 2 / 1; overflow: hidden;
+  border-radius: 1.2em; background: #f0ede9;
+  box-shadow: 0 12px 32px rgba(40, 44, 52, 0.18), 0 2px 6px rgba(40, 44, 52, 0.12);
+}
+.kname-c-bg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; pointer-events: none; user-select: none; }
+.kname-c-body { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; z-index: 3; }
+.kname-selected-label {
+  font: 500 1em/1.3 var(--font); letter-spacing: 0.24em; text-transform: uppercase; white-space: nowrap;
+  max-width: 22em; overflow: hidden; color: #1e3659; margin-bottom: 0.5em;
+}
+.kname-selected-ko { font-family: var(--font-name); font-size: 4em; font-weight: 400; line-height: 1.1; letter-spacing: 0.02em; white-space: nowrap; color: #10253c; }
+.kname-selected-ro { font-family: var(--font-name); font-size: 1.5em; letter-spacing: 0.04em; white-space: nowrap; color: #1e3454; margin-top: 0.15em; }
+
+.kname-btn-row { width: 100%; display: flex; gap: 12px; }
+.kname-save,
+.kname-restart {
+  flex: 1; padding: 21px; border-radius: 12px; font-size: 20px; font-weight: 700; letter-spacing: 0.02em;
+  cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+.kname-save { border: 0; background: #69665f; color: #fff; }
+.kname-save:hover { background: #54524c; }
+.kname-save:disabled { opacity: 0.5; cursor: default; }
+.kname-restart { border: 0; background: #8a8478; color: #fff; }
+.kname-restart:hover { background: #736d63; }
+.kname-save:active, .kname-restart:active { transform: scale(0.98); }
+
+button:focus-visible, input:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.kname-footer {
+  border-top: 1px solid #e6e6e6; padding: 20px 16px 24px; text-align: center;
+  font-size: 13px; line-height: 1.6; color: var(--soft);
+}
+.kname-footer p:first-child { font-family: 'Noto Sans KR', sans-serif; font-weight: 500; color: #6b7a8c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kname-step, .kname-logo-loader-fill, .kname-loading-text { animation: none; }
+  .kname-logo-loader-fill { clip-path: none; }
+}
+
+@media (max-width: 767px) {
+  .kname-wrap { padding: 32px 16px 24px; }
+  .kname-logo { height: 26px; margin-bottom: 48px; }
+    .kname-progress { margin-bottom: 24px; }
+  .kname-input-card { border: 0; padding: 24px 0; box-shadow: none; gap: 16px; background: transparent; }
+  .kname-lang-tabs { gap: 6px; }
+  .kname-lang-tab { padding: 10px 6px; gap: 4px; border-radius: 10px; min-width: 0; }
+  .kname-lang-label { font-size: 13px; white-space: nowrap; }
+  .kname-lang-full { display: none; }
+  .kname-lang-short { display: inline; }
+  .kname-lang-check { width: 18px; height: 18px; font-size: 9px; }
+  .kname-input-card input[type='text'] { font-size: 16px; padding: 12px 14px; background: #fff; }
+  .kname-lang-tab { background: #fff; }
+  .kname-primary { padding: 14px; font-size: 15px; }
+  .kname-card { padding: 14px 16px; }
+  .kname-ko { font-size: 22px; }
+  .kname-ro { font-size: 13px; }
+  .kname-card-check { width: 24px; height: 24px; }
+  .kname-again { padding: 14px; font-size: 15px; }
+  .kname-save, .kname-restart { padding: 14px; font-size: 15px; }
+  .kname-btn-row { gap: 8px; }
+  .kname-step-title { font-size: 16px; }
+  .kname-step-desc { font-size: 13px; }
+  .kname-step-num { width: 30px; height: 30px; font-size: 14px; }
+  .kname-back { font-size: 14px; }
+  .kname-message { font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+  .kname-logo { height: 22px; margin-bottom: 40px; }
+    .kname-label { font-size: 12px; }
+  .kname-lang-label { font-size: 12px; }
+  .kname-btn-row { flex-direction: column; }
+  .kname-step-title { font-size: 15px; }
+  .kname-step-desc { font-size: 12px; }
+  .kname-step-num { width: 28px; height: 28px; font-size: 13px; }
+  .kname-footer { font-size: 12px; }
+}

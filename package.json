@@ -1,0 +1,21 @@
+{
+  "name": "hazzys-kname-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "node tests/kname.test.js && node tests/api.test.js"
+  },
+  "dependencies": {
+    "html2canvas": "1.4.1",
+    "next": "^15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "engines": {
+    "node": ">=18.18"
+  }
+}
