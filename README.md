@@ -1,14 +1,6 @@
 <div align="left">
 
-<!-- logo -->
-<p><img src="public/images/hazzys-logo.svg" width="200"/></p>
-<img src="public/readme/icon-project-html.svg"/>
-<img src="public/readme/icon-project-css.svg"/>
-<img src="public/readme/icon-project-figma.svg"/>
-<img src="public/readme/icon-project-js.svg"/>
-<img src="public/readme/icon-project-php.svg"/>
-<img src="public/readme/icon-project-wordpress.svg"/>
-<img src="public/readme/icon-project-anthropic.svg"/>
+<p><img src="public/images/hazzys-logo.svg" width="240"/></p>
 </div>
 
 > 이 저장소는 실무 프로젝트를 포트폴리오용으로 재현한 데모이며, 실제 이벤트 페이지와 무관합니다.
@@ -23,7 +15,6 @@ Claude API를 연동했습니다. 이름 생성 규칙은 별도 스킬 파일�
 규칙 기반으로 한 번 더 검증해 실제 한국 이름처럼 자연스러운 이름만 보여주도록 구성했습니다.<br />
 
 ## 🗓 프로젝트 일정
-<!-- TODO: 실제 작업 기간으로 수정 -->
 **총 일정 2026.09 ~ 2026.10, 1인**
 <br /><br />
 기획 및 디자인 (Figma)
@@ -41,7 +32,7 @@ Claude API를 연동했습니다. 이름 생성 규칙은 별도 스킬 파일�
 
 
 ## 🖥 화면 구성
-<img src="public/readme/img-project-hazzys.jpg" width="680">
+<img src="public/images/img-project-hazzys.jpg" width="680">
 
 ## ⚙ 기술 스택
 이 프로젝트는 다음 기술을 활용하여 구현되었습니다.
@@ -120,7 +111,7 @@ Claude API를 연동했습니다. 이름 생성 규칙은 별도 스킬 파일�
 
 <br />
 
-## 📦 이 저장소 (포트폴리오 재현 데모)
+## 📦 포트폴리오 재현 데모
 실무 페이지는 회사 API를 사용해 공개할 수 없어서, 같은 흐름을 **Next.js**로 다시 구현해 배포했습니다.
 
 | 실무 (WordPress) | 데모 (이 저장소) |
